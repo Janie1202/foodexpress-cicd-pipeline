@@ -71,6 +71,6 @@ Checkout → Install → Test → Build Image → Remove Old → Deploy → Heal
 
 ## Notes
 
-- `.pem` and `.env` files are excluded via `.gitignore` — never commit secrets
+- `.pem` and `.env` files are excluded via `.gitignore` 
 - Jenkins must have Docker permissions: `sudo usermod -aG docker jenkins`
 - Webhook URL format: `http://<EC2_IP>:8080/github-webhook/`
