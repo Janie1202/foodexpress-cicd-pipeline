@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // ── Change these to match your setup ───────────────────────────────
         APP_NAME    = "foodexpress-api"
         IMAGE_NAME  = "foodexpress-api"
         IMAGE_TAG   = "${BUILD_NUMBER}"
@@ -18,7 +17,7 @@ pipeline {
 
     stages {
 
-        // ── Stage 1: Checkout ──────────────────────────────────────────────
+        // Stage 1: Checkout 
         stage("Checkout") {
             steps {
                 echo "Cloning repository..."
@@ -26,7 +25,7 @@ pipeline {
             }
         }
 
-        // ── Stage 2: Install Dependencies ─────────────────────────────────
+        // Stage 2: Install Dependencies 
         stage("Install Dependencies") {
             steps {
                 echo "Installing Node.js dependencies..."
@@ -34,7 +33,7 @@ pipeline {
             }
         }
 
-        // ── Stage 3: Run Tests ─────────────────────────────────────────────
+        // Stage 3: Run Tests
         stage("Run Tests") {
             steps {
                 echo "Running unit tests..."
