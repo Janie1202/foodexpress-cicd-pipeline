@@ -41,7 +41,7 @@ pipeline {
             }
         }
 
-        // ── Stage 4: Build Docker Image ────────────────────────────────────
+        // Stage 4: Build Docker Image 
         stage("Build Docker Image") {
             steps {
                 echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}"
@@ -50,7 +50,7 @@ pipeline {
             }
         }
 
-        // ── Stage 5: Stop & Remove Old Container ──────────────────────────
+        //  Stage 5: Stop & Remove Old Container 
         stage("Remove Old Container") {
             steps {
                 echo "Removing old container if it exists..."
@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        // ── Stage 6: Deploy New Container ─────────────────────────────────
+        // Stage 6: Deploy New Container
         stage("Deploy") {
             steps {
                 echo "Deploying new container..."
@@ -75,7 +75,7 @@ pipeline {
             }
         }
 
-        // ── Stage 7: Health Check ──────────────────────────────────────────
+        // Stage 7: Health Check 
         stage("Health Check") {
             steps {
                 echo "Waiting for container to start..."
@@ -90,15 +90,14 @@ pipeline {
 
     }
 
-    // ── Post Actions ───────────────────────────────────────────────────────────
+    // Post Actions 
     post {
         success {
             echo "Pipeline completed successfully! FoodExpress API is live."
             echo "Access at: http://<YOUR_EC2_PUBLIC_IP>:${HOST_PORT}/api/menu"
         }
         failure {
-            echo "Pipeline FAILED. Check logs above for details."
-            // Optional: add email/Slack notification here
+            
         }
         always {
             echo "Cleaning up dangling Docker images..."

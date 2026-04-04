@@ -30,8 +30,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// ─── GET Routes ──────────────────────────────────────────────────────────────
-
 // GET all menu items
 app.get("/api/menu", (req, res) => {
   const { category, available } = req.query;
@@ -79,7 +77,6 @@ app.get("/api/orders/:id", (req, res) => {
   res.json({ success: true, data: order });
 });
 
-// ─── POST Routes ─────────────────────────────────────────────────────────────
 
 // POST create a new menu item
 app.post("/api/menu", (req, res) => {
@@ -123,8 +120,6 @@ app.post("/api/orders", (req, res) => {
   res.status(201).json({ success: true, message: "Order placed", data: newOrder });
 });
 
-// ─── PUT Routes ──────────────────────────────────────────────────────────────
-
 // PUT update a menu item
 app.put("/api/menu/:id", (req, res) => {
   const index = menuItems.findIndex((m) => m.id === parseInt(req.params.id));
@@ -157,8 +152,6 @@ app.put("/api/orders/:id/status", (req, res) => {
   res.json({ success: true, message: "Order status updated", data: orders[index] });
 });
 
-// ─── DELETE Routes ───────────────────────────────────────────────────────────
-
 // DELETE a menu item
 app.delete("/api/menu/:id", (req, res) => {
   const index = menuItems.findIndex((m) => m.id === parseInt(req.params.id));
@@ -181,7 +174,7 @@ app.delete("/api/orders/:id", (req, res) => {
   res.json({ success: true, message: "Order deleted", data: deleted });
 });
 
-// ─── Start Server ────────────────────────────────────────────────────────────
+//  Start Server 
 app.listen(PORT, () => {
   console.log(`FoodExpress API running on port ${PORT}`);
 });
