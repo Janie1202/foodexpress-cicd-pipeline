@@ -40,6 +40,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     
+
                     bat "\"C:\\terraform\\terraform.exe\" init"
                     bat "\"C:\\terraform\\terraform.exe\" apply -auto-approve"
                     
