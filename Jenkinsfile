@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HOST    = "tcp://localhost:2375"
+        DOCKER_HOST    = "tcp://127.0.0.1:2375"
         DOCKER_USER    = "sreytoch12" 
         APP_NAME       = "foodexpress-api"
         IMAGE_NAME     = "${DOCKER_USER}/foodexpress-api"
