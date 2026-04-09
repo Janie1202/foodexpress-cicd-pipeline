@@ -36,21 +36,22 @@ pipeline {
                 bat "docker push %IMAGE_NAME%:%IMAGE_TAG%"
                 bat "docker push %IMAGE_NAME%:latest"
             }
-        }
+        
 
         stage("Terraform & Deploy") {
             steps {
                 dir('terraform') {
-                    bat "terraform init"
-                    bat "terraform apply -auto-approve"
+                    bat "\"C:\\terraform\\terraform.exe\" init"
+                    bat "\"C:\\terraform\\terraform.exe\" apply -auto-approve"
+                    
                     script {
-                        // Capture IP on Windows
-                        env.PUBLIC_IP = bat(script: "terraform output -raw public_ip", returnStdout: true).trim()
+                        env.PUBLIC_IP = bat(script: "\"C:\\terraform\\terraform.exe\" output -raw public_ip", returnStdout: true).trim()
                     }
                 }
-                echo "Deployment instructions would go here for ${env.PUBLIC_IP}"
+                echo "FoodExpress is LIVE at: http://${env.PUBLIC_IP}:3000"
             }
         }
+
     }
 
     post {
