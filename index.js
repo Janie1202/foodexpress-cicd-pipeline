@@ -180,3 +180,5 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+console.log("AUPP v2");
