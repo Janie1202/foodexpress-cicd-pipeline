@@ -1,34 +1,48 @@
-
 provider "aws" {
-  region = "us-east-1" 
-  access_key = 	"AKIAS2LQWQEB4RU6DAMA"
-  secret_key = "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"
+  region = "us-east-1"
 }
 
 resource "aws_instance" "foodexpress_server" {
-  ami           = "ami-0ec10929233384c7f" #Ubuntu
-  instance_type = "t2.micro"
-  key_name      = "mykey" 
-  tags = { Name = "FoodExpress-Production" }
+  ami           = "ami-0ec10929233384c7f"
+  instance_type = "t3.micro"
+  key_name      = "final"  
 
-  # This opens port 80/3000 
   vpc_security_group_ids = [aws_security_group.allow_web.id]
+
+  user_data = <<-EOF
+    #!/bin/bash
+    apt-get update -y
+    apt-get install -y docker.io
+    systemctl start docker
+    systemctl enable docker
+    usermod -aG docker ubuntu
+    docker pull sreytoch12/foodexpress-api:latest
+    docker run -d --name foodexpress-api \
+      -p 3000:3000 sreytoch12/foodexpress-api:latest
+  EOF
+
+  tags = {
+    Name = "FoodExpress-Server"
+  }
 }
 
 resource "aws_security_group" "allow_web" {
   name = "allow_web_traffic"
+
   ingress {
-    from_port   = 3000 # local host
+    from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
