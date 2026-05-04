@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 resource "aws_instance" "foodexpress_server" {
-  ami           = "ami-0ec10929233384c7f"
-  instance_type = "t3.micro"
-  key_name      = "final"  
+  ami           = "ami-091138d0f0d41ff90"
+  instance_type = "t3.medium"
+  key_name      = "cloud-final"  
 
   vpc_security_group_ids = [aws_security_group.allow_web.id]
 
