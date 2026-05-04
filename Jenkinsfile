@@ -8,9 +8,9 @@ pipeline {
         IMAGE_TAG        = "${BUILD_NUMBER}"
 
         DOCKER_HUB_CREDS = credentials('docker-hub-creds')
-        AWS_ACCESS_KEY_ID     = credentials('aws-creds-key')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-creds-secret')
-        SONAR_TOKEN      = credentials('sonar-token')
+        AWS_ACCESS_KEY_ID     = credentials('aws-creds')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-creds')
+        SONAR_TOKEN      = credentials('sonarqube-token')
     }
 
     stages {
@@ -24,8 +24,8 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 script {
-                    def scannerHome = tool 'SonarScanner'
-                    withSonarQubeEnv('SonarQube-Server') {
+                    def scannerHome = tool 'Sonarqube'
+                    withSonarQubeEnv('Jenkins2SonarQube') {
                         sh "${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=foodexpress \
                             -Dsonar.sources=. \
