@@ -8,11 +8,19 @@
     "dev": "nodemon index.js",
     "test": "jest --forceExit"
   },
-  "keywords": ["api", "express", "docker", "jenkins", "cicd", "devops"],
+  "keywords": [
+    "api",
+    "express",
+    "docker",
+    "jenkins",
+    "cicd",
+    "devops"
+  ],
   "author": "FoodExpress DevOps Team",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "path-to-regexp": "^0.1.13"
   },
   "devDependencies": {
     "jest": "^29.7.0",
