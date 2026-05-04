@@ -174,11 +174,12 @@ app.delete("/api/orders/:id", (req, res) => {
   res.json({ success: true, message: "Order deleted", data: deleted });
 });
 
-//  Start Server 
-app.listen(PORT, () => {
-  console.log(`FoodExpress API running on port ${PORT}`);
-});
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`FoodExpress API running on port ${PORT}`);
+    console.log("AUPP v2");
+  });
+}
 
 module.exports = app;
-
-console.log("AUPP v2");

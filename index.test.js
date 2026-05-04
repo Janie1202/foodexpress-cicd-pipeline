@@ -116,3 +116,26 @@ describe("DELETE /api/menu/:id", () => {
     expect(res.statusCode).toBe(404);
   });
 });
+
+
+describe("Additional Coverage Tests", () => {
+  it("should return a single order by ID", async () => {
+    const res = await request(app).get("/api/orders/1");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.data.id).toBe(1);
+  });
+
+  it("should update a menu item", async () => {
+    const res = await request(app)
+      .put("/api/menu/1")
+      .send({ price: 10.99 });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.data.price).toBe(10.99);
+  });
+
+  it("should delete an order", async () => {
+    const res = await request(app).delete("/api/orders/2");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.success).toBe(true);
+  });
+});
